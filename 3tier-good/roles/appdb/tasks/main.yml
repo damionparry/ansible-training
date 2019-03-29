@@ -1,0 +1,18 @@
+---
+# tasks file for appdb
+- name: install postgres server
+  yum:
+    name: postgresql-server
+    state: latest
+  register: postgres_install
+
+- name: initialize database if it's just been installed
+  command: postgresql-setup initdb
+  when: postgres_install.changed
+
+- name: enable and start postgres
+  service:
+    name: postgresql.service
+    state: started
+    enabled: yes
+

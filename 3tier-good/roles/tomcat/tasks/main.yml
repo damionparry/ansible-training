@@ -1,0 +1,35 @@
+---
+# tasks file for tomcat
+- name: install tomcat
+  package:
+    name: tomcat
+    state: latest
+
+- name: create ansible tomcat directory
+  file:
+    path: /usr/share/tomcat/webapps/ROOT
+    state: directory
+
+- name: copy static index.html to tomcat webapps/ansible/index.html
+  template:
+    src: index.html.j2
+    dest: /usr/share/tomcat/webapps/ROOT/index.html
+    mode: 0644
+
+- name: ensure server name index page dir is present
+  file:
+    name: /usr/share/tomcat/webapps/ansible/
+    state: directory
+
+- name: template over the index file
+  template:
+    src: index.html.app.j2
+    dest: /usr/share/tomcat/webapps/ansible/index.html
+
+
+- name: enable and start tomcat
+  service:
+    name: tomcat
+    state: started
+    enabled: yes
+
