@@ -4,11 +4,16 @@
   yum:
     name: postgresql-server
     state: latest
-  register: postgres_install
 
-- name: initialize database if it's just been installed
-  command: postgresql-setup initdb
-  when: postgres_install.changed
+- name: block to check state of database initialisation
+  block:
+    # Task to check whether of not the database has been initialised
+    - name: check that the database was successfully initialised
+      command: /usr/bin/postgresql-check-db-dir /var/lib/pgsql/data
+      ignore_errors: yes
+  rescue:
+    - name: init check failed therefore initialising
+      command: postgresql-setup initdb
 
 - name: enable and start postgres
   service:
