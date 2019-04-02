@@ -17,12 +17,12 @@
   #notify: win_ad_install server reboot
 
 # reboot the server and wait for it to come back up
-- name: reboot the server post install
-  win_reboot:
-    reboot_timeout: 3600
+#- name: reboot the server post install
+#  win_reboot:
+#    reboot_timeout: 3600
 
 - name: retrieve the domain list
-  command: 'nltest /dclist:"{{ ad_domain_name }}"'
+  win_shell: 'nltest /dclist:"{{ ad_domain_name }}"'
   register: win_ad_install_domain_list
 
 - name: print the domain list
