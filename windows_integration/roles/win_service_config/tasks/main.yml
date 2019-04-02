@@ -25,3 +25,4 @@
     action: allow
     direction: in
     localport: "{{ local_port }}"
+    protocol: "{{ protocol_name }}"
