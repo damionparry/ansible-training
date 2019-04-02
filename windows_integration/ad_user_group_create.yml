@@ -1,0 +1,6 @@
+# Playbook to setup AD users and groups
+- name: playbook to add the ad users and groups
+  vars_files: users_var.yml
+  hosts: windows
+  roles:
+    - win_ad_user

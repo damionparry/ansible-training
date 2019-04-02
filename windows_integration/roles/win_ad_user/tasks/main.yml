@@ -1,0 +1,17 @@
+---
+# role to add users from user_info list
+- name: add the groups to the domain
+  win_domain_group:
+    name: "{{ item.group_name }}"
+    scope: "{{ item.group_scope }}"
+  with_items: "{{ user_info.group }}"
+
+- name: add the users to the domain
+  win_domain_user:
+    name: "{{ item.name }}"
+    firstname: "{{ item.firstname }}"
+    surname: "{{ item.surname }}"
+    password: "{{ item.password }}"
+    groups: "{{ item.group }}"
+    email: "{{ item.email }}"
+  with_items: "{{ user_info.users }}"
