@@ -7,7 +7,7 @@
     state: present
 
 - name: set up the AD control
-  win_domain_controller:
+  win_domain:
     dns_domain_name: "{{ ad_domain_name }}"
     domain_admin_user: "admin@{{ ad_domain_name }}"
     domain_admin_password: "{{ ansible_password }}"
