@@ -19,7 +19,7 @@
 # reboot the server and wait for it to come back up
 - name: reboot the server post install
   win_reboot:
-    reboot_time: 3600
+    reboot_timeout: 3600
 
 - name: retrieve the domain list
   command: 'nltest /dclist:"{{ ad_domain_name }}"'
