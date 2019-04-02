@@ -1,36 +1,32 @@
 ---
 # vars of users:
 user_info:
-  - name: james
-    firstname: James
-    surname: Jockey
-    password: redhat@123
-    email: james@ad1.4386.example.opentlc.com 
-    - group:
-        group_name: dev
-        group_scope: domainlocal
-   - name: bill
-     firstname: Bill
-     surname: Gates
-     password: redhat@123
-     email: bill@ad1.${guid}.example.opentlc.com
-     - group:
-         group_name: dev
-         group_scope: domainlocal
-   - name: mickey
-     firstname: Mickey
-     surname: Mouse
-     password: redhat@123
-     email: mickey@ad1.${guid}.example.opentlc.com
-     - group:
-         group_name: qa
-         group_scope: domainlocal
-   - name: donald
-     firstname: Donald
-     surname: Duck
-     password: redhat@123
-     email: donald@ad1.${guid}.example.opentlc.com
-     - group:
-         group_name: qa
-         group_scope: domainlocal
-  
+  group:
+    - domainlocal:  dev
+    - domainlocal: qa
+  users:
+    - name: james
+      firstname: James
+      surname: Jockey
+      password: redhat@123
+      email: james@ad1.4386.example.opentlc.com 
+      group: dev
+    - name: bill
+      firstname: Bill
+      surname: Gates
+      password: redhat@123
+      email: bill@ad1.4386.example.opentlc.com
+      group: dev
+    - name: mickey
+      firstname: Mickey
+      surname: Mouse
+      password: redhat@123
+      email: mickey@ad1.4386.example.opentlc.com
+      group: qa
+    - name: donald
+      firstname: Donald
+      surname: Duck
+      password: redhat@123
+      email: donald@ad1.4386.example.opentlc.com
+      group: qa
+    
