@@ -1,0 +1,26 @@
+---
+# role to configure a package on a windows server
+- name: downgrade chocolatey
+  win_chocolatey:
+    name: chocolatey
+    state: downgrade
+    version: 0.10.11
+
+- name: install {{ package }}
+  win_chocolatey:
+    name: "{{ package }}"
+    package_params: "{{ parameters }}"
+    when: (ansible_distribution == "Microsoft Windows Server 2012 R2 Standard")
+
+- name: configure {{ service_name }} as a service
+  win_service: 
+    name: "{{ service_name }}"
+    start_mode: auto
+    state: started
+    when: (ansible_distribution == "Microsoft Windows Server 2012 R2 Standard")
+
+- name: configure firewall to allow inbound {{ local_port }}
+  win_firewall_rule:
+    action: allow
+    direction: in
+    localport: "{{ local_port }}"

@@ -5,6 +5,7 @@
   win_feature:
     name: AD-Domain-Services
     state: present
+    register: win_ad_setup_install
 
 - name: set up the AD control
   win_domain:
@@ -17,9 +18,10 @@
   #notify: win_ad_install server reboot
 
 # reboot the server and wait for it to come back up
-#- name: reboot the server post install
-#  win_reboot:
-#    reboot_timeout: 3600
+- name: reboot the server post install
+  win_reboot:
+    reboot_timeout: 3600
+  when: {{ win_ad_setup_install.changed }}
 
 - name: retrieve the domain list
   win_shell: 'nltest /dclist:"{{ ad_domain_name }}"'
