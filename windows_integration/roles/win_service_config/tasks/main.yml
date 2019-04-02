@@ -21,6 +21,7 @@
 
 - name: configure firewall to allow inbound {{ local_port }}
   win_firewall_rule:
+    name: "Inbound rule on port {{ local_port }}"
     action: allow
     direction: in
     localport: "{{ local_port }}"
