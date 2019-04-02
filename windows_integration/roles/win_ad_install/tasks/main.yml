@@ -1,0 +1,31 @@
+---
+# set of tasks to install windows AD on a Server 2012 box
+
+- name: install the AD-Domain-Services
+  win_feature:
+    name: AD-Domain-Services
+    state: present
+
+- name: set up the AD control
+  win_domain_controller:
+    dns_domain_name: "{{ ad_domain_name }}"
+    domain_admin_user: "admin@{{ ad_domain_name }}"
+    domain_admin_password: "{{ ansible_password }}"
+    local_admin_password: "{{ ansible_password }}"
+    safe_mode_password: "{{ ansible_password }}"
+    state: domain_controller
+  #notify: win_ad_install server reboot
+
+# reboot the server and wait for it to come back up
+- name: reboot the server post install
+  win_reboot:
+    reboot_time: 3600
+
+- name: retrieve the domain list
+  command: 'nltest /dclist:"{{ ad_domain_name }}"'
+  register: win_ad_install_domain_list
+
+- name: print the domain list
+  debug:
+    msg: "{{ win_ad_install_domain_list.stdout }}"
+

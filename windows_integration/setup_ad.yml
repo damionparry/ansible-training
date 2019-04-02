@@ -1,0 +1,6 @@
+---
+# Playbook to setup AD on windows host group
+- name: setup AD in windows host group
+  hosts: windows
+  roles:
+    - win_ad_install
