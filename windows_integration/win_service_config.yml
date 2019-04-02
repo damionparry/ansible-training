@@ -1,4 +1,3 @@
----
 # Playbook to setup AD on windows host group
 - name: install and configure OpenSSH
   vars_files: ssh_var.yml

@@ -1,0 +1,8 @@
+---
+- name: structure looks like
+  vars_files: users_var.yml
+  gather_facts: false
+  hosts: all
+  tasks:
+    debug:
+      mesg: "{{ user_info }}"
