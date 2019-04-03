@@ -5,7 +5,7 @@
   win_feature:
     name: AD-Domain-Services
     state: present
-    register: win_ad_setup_install
+  register: win_ad_setup_install
 
 - name: set up the AD control
   win_domain:
@@ -15,13 +15,14 @@
     local_admin_password: "{{ ansible_password }}"
     safe_mode_password: "{{ ansible_password }}"
     state: domain_controller
+  register: win_ad_setup
   #notify: win_ad_install server reboot
 
 # reboot the server and wait for it to come back up
 - name: reboot the server post install
   win_reboot:
     reboot_timeout: 3600
-  when: {{ win_ad_setup_install.changed }}
+  when: {{ win_ad_setup.reboot_required}}
 
 - name: retrieve the domain list
   win_shell: 'nltest /dclist:"{{ ad_domain_name }}"'
