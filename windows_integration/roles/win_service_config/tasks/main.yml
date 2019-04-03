@@ -10,6 +10,7 @@
   win_chocolatey:
     name: "{{ package_name }}"
     package_params: "{{ parameters }}"
+    state: latest
     when: (ansible_distribution == "Microsoft Windows Server 2012 R2 Standard")
 
 - name: configure {{ service_name }} as a service
@@ -26,3 +27,5 @@
     direction: in
     localport: "{{ local_port }}"
     protocol: "{{ protocol_name }}"
+    state: present
+    enabled: yes
