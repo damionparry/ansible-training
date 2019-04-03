@@ -1,0 +1,16 @@
+---
+# Role to create the instances
+- name: role to create instances from vars file
+  hosts: workstation
+  vars_files: osp_vars.yml
+  tasks:
+    - name: create instances
+      os_server:
+        name: "{{ item.name }}"
+        image: "{{ item.image }}"
+        flavor: "{{ item.flavor }}"
+        nics: "{{ item.nics }}"
+        key_name: "{{ item.key_name}}"
+        security_groups: "{{ item.security_groups }}"
+        state: present
+      with_items: "{{ instances }}"
