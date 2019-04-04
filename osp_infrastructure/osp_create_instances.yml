@@ -12,6 +12,7 @@
         nics: "{{ item.nics }}"
         key_name: "{{ item.key_name}}"
         security_groups: "{{ item.security_groups }}"
+        meta: "{{ item.meta }}"
         state: present
       with_items: "{{ instances }}"
     - name: associate floating ip's

@@ -2,7 +2,9 @@
 # Variables defining the openstack instances:
 instances:
   - name: app1
-    meta: "group=apps,deployment_name=QA"
+    meta: 
+      group: apps
+      deployment_name: QA
     flavor: m2.small
     key_name: dp_test
     nics:
@@ -11,7 +13,9 @@ instances:
     security_groups: 
       - apps
   - name: app2
-    meta: "group=apps,deployment_name=QA"
+    meta: 
+      group: apps
+      deployment_name: QA
     flavor: m2.small
     key_name: dp_test
     nics:
@@ -20,7 +24,9 @@ instances:
     security_groups: 
       - apps
   - name: database
-    meta: "group=apps,deployment_name=QA"
+    meta: 
+      group: database
+      deployment_name: QA
     flavor: m2.small
     key_name: dp_test
     nics:
@@ -29,7 +35,9 @@ instances:
     security_groups: 
       - db
   - name: frontend
-    meta: "group=apps,deployment_name=QA"
+    meta: 
+      group: frontend
+      deployment_name: QA
     flavor: m2.small
     key_name: dp_test
     nics:
