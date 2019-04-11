@@ -1,0 +1,11 @@
+---
+# Role to generate an in memory inventory
+- name: query OSP to get instance details
+  os_server_facts:
+   cloud: ospcloud
+  register: result
+- name: add instance and group metadata
+  add_host:
+   name: "{{ item.public_v4 }}"
+   group: "{{ item.metadata.group }}"
+  with_items: "{{result.ansible_facts.openstack_servers}}"

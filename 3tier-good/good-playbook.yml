@@ -13,15 +13,23 @@
 #   Bare variables
 #   No use of handlers
 
+- name: generate inventory from OSP
+  hosts: workstation
+  roles:
+    - inventory
+
 - name: common configuration
-  hosts: all
+  hosts: 
+    - frontend
+    - apps
+    - database
   gather_facts: false # remove later! speeds up testing
   become: true
   roles:
     - common
 
 - name: deploy haproxy on frontends
-  hosts: frontends
+  hosts: frontend
   gather_facts: false # remove later! speeds up testing
   become: true
   roles:
@@ -38,6 +46,6 @@
 - name: deploy postgres on appdb servers
   gather_facts: false
   become: true
-  hosts: appdbs
+  hosts: database
   roles:
     - appdb
